@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: petrolalert
-          image: petrolalert_version
+          image: petrolalert:0.0.1-SNAPSHOT
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
