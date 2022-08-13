@@ -27,3 +27,18 @@ Make application work properly:
 Application:
 - http://localhost:32764/stations - get method - return list stations
 - http://localhost:32764/stations - post method - add record with station name 
+
+Run Kafka: 
+1) deploy Zookeeper to track its configuration of what topics are added or removed to served subscribers: 
+- kubectl create -f zookeeper-deployment.yaml 
+
+2) create service for Zookeeper and route traffic to the Zookeeper pod: 
+- kubectl create -f zookeeper-service-deployment.yaml
+
+3) deploy kafka:
+- kubectl create -f kafka-deployment.yaml
+
+4) Deploying Kafka Broker: 
+- kubectl create -f kafka-broker-deployment.yaml
+
+admintome-test:1:1 topic should be created
