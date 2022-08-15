@@ -42,3 +42,44 @@ Run Kafka:
 - kubectl create -f kafka-broker-deployment.yaml
 
 admintome-test:1:1 topic should be created
+
+
+Example JSON data for database: 
+
+        {
+            "stationName": "test",
+            "localization": {
+            "lon": 2.0,
+            "lat": 2.1
+        },
+        "petrolPrices": {
+            "PB95": {
+            "name": "PB95",
+            "price": 7.0,
+            "currency": "PLN"
+        },
+         "PB98": {
+            "name": "PB98",
+            "price": 8.45,
+            "currency": "PLN"
+
+        },
+         "Diesel": {
+            "name": "Diesel",
+            "price": 6.0,
+            "currency": "PLN"
+
+        },
+        "LPG": {
+            "name": "LPG",
+            "price": 8.0,
+            "currency": "PLN"
+
+        },
+         "DieselUltimate": {
+            "name": "DieselUltimate",
+            "price": 6.40,
+            "currency": "PLN"
+        }
+    }
+}
