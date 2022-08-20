@@ -4,62 +4,46 @@ import com.petrol.petrolalert.PetrolName;
 import com.petrol.petrolalert.models.Localization;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
-import com.petrol.petrolalert.services.PetrolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
 @Repository
 public class PetrolStationsRepository {
   private final JdbcTemplate jdbcTemplate;
-  private final PetrolService petrolService;
 
   @Autowired
-  public PetrolStationsRepository(JdbcTemplate jdbcTemplate, PetrolService petrolService) {
+  public PetrolStationsRepository(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
-    this.petrolService = petrolService;
   }
 
-  public void add(PetrolStation petrolStation) {
+  public void add(String name, double lat, double lon, double pb95, double pb98, double diesel, double lpg, double dieselUltimate) {
     jdbcTemplate.update("INSERT INTO petrol_stations(" +
             "stationName, coordinateLat, coordinateLong, PB95, PB98, Diesel, LPG, DieselUltimate) " +
             "values(?,?,?,?,?,?,?,?)",
-        petrolStation.getName(),
-        petrolStation.getLocalization().getLat(),
-        petrolStation.getLocalization().getLong(),
-        petrolService.getPriceByPetrolName(PetrolName.PB95, petrolStation.getPetrolPrices()),
-        petrolService.getPriceByPetrolName(PetrolName.PB98, petrolStation.getPetrolPrices()),
-        petrolService.getPriceByPetrolName(PetrolName.Diesel, petrolStation.getPetrolPrices()),
-        petrolService.getPriceByPetrolName(PetrolName.LPG, petrolStation.getPetrolPrices()),
-        petrolService.getPriceByPetrolName(PetrolName.DieselUltimate, petrolStation.getPetrolPrices())
-    );
+        name, lat, lon, pb95, pb98, diesel, lpg, dieselUltimate);
   }
 
-  public PetrolStation getPetrolStations(String stationName) throws SQLException {
+  public PetrolStation getPetrolStations(String stationName) {
     String sql = "SELECT * FROM petrol_stations WHERE stationName = ?";
-      // why it doesn't work?
-      //    new HashMap<>()
-      //        .put(PetrolName.PB95, petrolService.mapPetrol(PetrolName.PB95, rs))
-      //        .put(PetrolName.PB98, petrolService.mapPetrol(PetrolName.PB98, rs))
-      //        .put(PetrolName.Diesel, petrolService.mapPetrol(PetrolName.Diesel, rs))
-      //        .put(PetrolName.DieselUltimate, petrolService.mapPetrol(PetrolName.DieselUltimate, rs))
-      //        .put(PetrolName.LPG, petrolService.mapPetrol(PetrolName.LPG, rs))
-      //),
 
-    return jdbcTemplate.queryForObject(sql, new Object[]{ stationName }, (rs, rowNum) ->
-        new PetrolStation(
-            rs.getString("stationName"),
-            new HashMap<PetrolName, Petrol>(),
-            new Localization(
-                rs.getDouble("coordinateLat"),
-                rs.getDouble("coordinateLong")
-            )
-        ));
+    return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+      HashMap<PetrolName, Petrol> petrolPrices = new HashMap<>();
+      petrolPrices.put(PetrolName.PB98, new Petrol(rs.getDouble(PetrolName.PB98.toString()), "USD"));
+      petrolPrices.put(PetrolName.Diesel, new Petrol(rs.getDouble(PetrolName.Diesel.toString()), "USD"));
+      petrolPrices.put(PetrolName.LPG, new Petrol(rs.getDouble(PetrolName.LPG.toString()), "USD"));
+      return new PetrolStation(
+          rs.getString("stationName"),
+          petrolPrices,
+          new Localization(
+              rs.getDouble("coordinateLat"),
+              rs.getDouble("coordinateLong")
+          )
+      );
+    }, stationName);
   }
 
   public void editPrice(Long serialNumber, List<Petrol> petrolPrices) {

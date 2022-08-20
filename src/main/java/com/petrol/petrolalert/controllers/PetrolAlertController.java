@@ -1,9 +1,7 @@
 package com.petrol.petrolalert.controllers;
 
-import java.sql.SQLException;
-
 import com.petrol.petrolalert.models.PetrolStation;
-import com.petrol.petrolalert.repositories.PetrolStationsRepository;
+import com.petrol.petrolalert.services.PetrolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,21 +9,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PetrolAlertController {
 
-  private final PetrolStationsRepository petrolStationsRepository;
+  private final PetrolService petrolService;
+
   @Autowired
-  public PetrolAlertController(PetrolStationsRepository petrolStationsRepository) {
-    this.petrolStationsRepository = petrolStationsRepository;
+  public PetrolAlertController(PetrolService petrolService) {
+    this.petrolService = petrolService;
   }
 
   @PostMapping("/stations")
   public ResponseEntity<String> addStation(@RequestBody PetrolStation petrolStation) {
-    petrolStationsRepository.add(petrolStation);
+    petrolService.addPetrolStation(petrolStation);
     return ResponseEntity.accepted().build();
   }
 
   @GetMapping("/stations/{name}")
-  public ResponseEntity<PetrolStation> getStation(@PathVariable String name) throws SQLException {
-    final PetrolStation station = petrolStationsRepository.getPetrolStations(name);
+  public ResponseEntity<PetrolStation> getStation(@PathVariable String name) {
+    final PetrolStation station = petrolService.getPetrolStations(name);
     return ResponseEntity.ok(station);
   }
 }
