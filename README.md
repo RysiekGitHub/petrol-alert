@@ -1,11 +1,11 @@
 # petrol-alert
 
 Mysql Deployment: (run from src/kubernetes)
-- kubectl apply -f mysql-secret.yaml
-- kubectl apply -f mysql-configmap.yaml
-- kubectl apply -f mysql-credentials.yaml
-- kubectl apply -f mysql-storage.yaml
-- kubectl apply -f mysql-deployment.yaml
+- kubectl apply -f mysql/mysql-secret.yaml
+- kubectl apply -f mysql/mysql-configmap.yaml
+- kubectl apply -f mysql/mysql-credentials.yaml
+- kubectl apply -f mysql/mysql-storage.yaml
+- kubectl apply -f mysql/mysql-deployment.yaml
 
 Application deployment:
 From project main catalog:
