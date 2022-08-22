@@ -31,13 +31,12 @@ docker {
 
 flyway {
   driver = 'mysql:mysql-connector-java:8.0.29'
-  url = 'jdbc:mysql://localhost:32766/petrolalert'
   user = 'test'
   password = 'test'
 }
 
 dependencies {
-  compileOnly "org.flywaydb:flyway-mysql"
+  implementation 'org.flywaydb:flyway-mysql:8.4.4'
   implementation(
           'org.flywaydb:flyway-gcp-spanner:7.13.0-beta'
   )
