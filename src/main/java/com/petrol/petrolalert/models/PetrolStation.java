@@ -1,6 +1,7 @@
 package com.petrol.petrolalert.models;
 import com.petrol.petrolalert.PetrolName;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PetrolStation {
 
@@ -24,5 +25,27 @@ public class PetrolStation {
 
   public Localization getLocalization() {
     return localization;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PetrolStation that = (PetrolStation) o;
+    return Objects.equals(stationName, that.stationName) && Objects.equals(petrolPrices, that.petrolPrices) && Objects.equals(localization, that.localization);
+  }
+
+  @Override
+  public String toString() {
+    return "PetrolStation{" +
+        "stationName='" + stationName + '\'' +
+        ", petrolPrices=" + petrolPrices +
+        ", localization=" + localization +
+        '}';
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(stationName, petrolPrices, localization);
   }
 }

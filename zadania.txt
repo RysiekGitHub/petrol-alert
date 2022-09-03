@@ -1,0 +1,15 @@
+
+Testy:
+// tests with inmemory mysql h2:  https://www.baeldung.com/spring-jpa-test-in-memory-database
+// controller tests: https://spring.io/guides/gs/testing-web/
+Zadania:
+
+1.09:
+- dodać test GET i POST dla controlera, //done
+- dodać testy dla repozytorium, //done
+- dodać testy jednostkowe dla Serwisu z ręcznym zamockowaniem repozytorium // done
+- dodać nowy schemat bazy danych,
+- dodać prostego UI do API. Wystawić UI na cluster i lokalnie (UI ma działać lokalnie i na clustrze)
+- przetestować kafkę
+- streamy i kolekcje teoretycznie
+

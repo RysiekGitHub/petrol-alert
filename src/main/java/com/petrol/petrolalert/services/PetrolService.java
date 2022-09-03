@@ -1,18 +1,17 @@
 package com.petrol.petrolalert.services;
 
 import com.petrol.petrolalert.PetrolName;
+import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
-import com.petrol.petrolalert.repositories.PetrolStationsRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 
 @Service
 public class PetrolService {
-  private final PetrolStationsRepository petrolStationsRepository;
+  private final PetrolStationsRepo petrolStationsRepository;
 
-  public PetrolService(PetrolStationsRepository petrolStationsRepository) {
+  public PetrolService(PetrolStationsRepo petrolStationsRepository) {
     this.petrolStationsRepository = petrolStationsRepository;
   }
 
@@ -29,7 +28,7 @@ public class PetrolService {
     );
   }
 
-  public PetrolStation getPetrolStations(String stationName) {
+  public PetrolStation getPetrolStationByName(String stationName) {
     return petrolStationsRepository.getPetrolStations(stationName);
   }
 

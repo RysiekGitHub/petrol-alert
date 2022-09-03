@@ -1,6 +1,7 @@
 package com.petrol.petrolalert.repositories;
 
 import com.petrol.petrolalert.PetrolName;
+import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
 import com.petrol.petrolalert.models.Localization;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
@@ -9,10 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Repository
-public class PetrolStationsRepository {
+public class PetrolStationsRepository implements PetrolStationsRepo {
   private final JdbcTemplate jdbcTemplate;
 
   @Autowired
@@ -35,22 +35,16 @@ public class PetrolStationsRepository {
       petrolPrices.put(PetrolName.PB98, new Petrol(rs.getDouble(PetrolName.PB98.toString()), "USD"));
       petrolPrices.put(PetrolName.Diesel, new Petrol(rs.getDouble(PetrolName.Diesel.toString()), "USD"));
       petrolPrices.put(PetrolName.LPG, new Petrol(rs.getDouble(PetrolName.LPG.toString()), "USD"));
+      petrolPrices.put(PetrolName.PB95, new Petrol(rs.getDouble(PetrolName.PB95.toString()), "USD"));
+      petrolPrices.put(PetrolName.DieselUltimate, new Petrol(rs.getDouble(PetrolName.DieselUltimate.toString()), "USD"));
       return new PetrolStation(
           rs.getString("stationName"),
           petrolPrices,
           new Localization(
-              rs.getDouble("coordinateLat"),
-              rs.getDouble("coordinateLong")
+              rs.getDouble("coordinateLong"),
+              rs.getDouble("coordinateLat")
           )
       );
     }, stationName);
-  }
-
-  public void editPrice(Long serialNumber, List<Petrol> petrolPrices) {
-
-  }
-
-  public void editName(Long serialNumber, String stationName) {
-
   }
 }
