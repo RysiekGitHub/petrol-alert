@@ -8,7 +8,7 @@ Zadania:
 - dodać test GET i POST dla controlera, //done
 - dodać testy dla repozytorium, //done
 - dodać testy jednostkowe dla Serwisu z ręcznym zamockowaniem repozytorium // done
-- dodać nowy schemat bazy danych,
+- dodać nowy schemat bazy danych, //done
 - dodać prostego UI do API. Wystawić UI na cluster i lokalnie (UI ma działać lokalnie i na clustrze)
 - przetestować kafkę
 - streamy i kolekcje teoretycznie
