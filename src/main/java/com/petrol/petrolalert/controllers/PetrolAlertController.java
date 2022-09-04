@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/stations")
 public class PetrolAlertController {
 
   private final PetrolService petrolService;
@@ -17,13 +16,13 @@ public class PetrolAlertController {
     this.petrolService = petrolService;
   }
 
-  @PostMapping
+  @PostMapping("/stations")
   public ResponseEntity<String> addStation(@RequestBody PetrolStation petrolStation) {
     petrolService.addPetrolStation(petrolStation);
     return ResponseEntity.ok("created");
   }
 
-  @GetMapping("/{name}")
+  @GetMapping("/stations/{name}")
   public ResponseEntity<PetrolStation> getStation(@PathVariable String name) {
     final PetrolStation station = petrolService.getPetrolStationByName(name);
     return ResponseEntity.ok(station);
