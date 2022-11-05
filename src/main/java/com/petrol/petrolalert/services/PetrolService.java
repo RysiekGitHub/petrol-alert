@@ -5,6 +5,8 @@ import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -17,9 +19,9 @@ public class PetrolService {
 
   public void addPetrolStation(PetrolStation petrolStation) {
     petrolStationsRepository.add(
-        petrolStation.getName(),
+        petrolStation.getStationName(),
         petrolStation.getLocalization().getLat(),
-        petrolStation.getLocalization().getLong(),
+        petrolStation.getLocalization().getLon(),
         getPriceByPetrolName(PetrolName.PB95, petrolStation.getPetrolPrices()),
         getPriceByPetrolName(PetrolName.PB98, petrolStation.getPetrolPrices()),
         getPriceByPetrolName(PetrolName.Diesel, petrolStation.getPetrolPrices()),
@@ -30,6 +32,10 @@ public class PetrolService {
 
   public PetrolStation getPetrolStationByName(String stationName) {
     return petrolStationsRepository.getPetrolStations(stationName);
+  }
+
+  public ArrayList<PetrolStation> getAllPetrolStations() {
+    return petrolStationsRepository.getAllPetrolStations();
   }
 
   private double getPriceByPetrolName(PetrolName petrolName, HashMap<PetrolName, Petrol> petrolPrices) {

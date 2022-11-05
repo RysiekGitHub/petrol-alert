@@ -5,8 +5,11 @@ import com.petrol.petrolalert.PetrolName;
 import java.util.Objects;
 
 public class Petrol {
-  private final Double price;
-  private final String currency;
+  private Double price;
+  private String currency;
+
+  public Petrol() {
+  }
 
   public Petrol(Double price, String currency) {
     this.price = price;
@@ -23,6 +26,18 @@ public class Petrol {
     if (o == null || getClass() != o.getClass()) return false;
     Petrol petrol = (Petrol) o;
     return Objects.equals(price, petrol.price) && Objects.equals(currency, petrol.currency);
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
   }
 
   @Override

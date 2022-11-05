@@ -5,18 +5,17 @@ import java.util.Objects;
 
 public class PetrolStation {
 
-  private final String stationName;
-  private final HashMap<PetrolName, Petrol> petrolPrices;
-  private final Localization localization;
+  private String stationName;
+  private HashMap<PetrolName, Petrol> petrolPrices;
+  private Localization localization;
+
+  public PetrolStation() {
+  }
 
   public PetrolStation(String stationName, HashMap<PetrolName, Petrol> petrolPrices, Localization localization) {
     this.stationName = stationName;
     this.petrolPrices = petrolPrices;
     this.localization = localization;
-  }
-
-  public String getName() {
-    return stationName;
   }
 
   public HashMap<PetrolName, Petrol> getPetrolPrices() {
@@ -33,6 +32,22 @@ public class PetrolStation {
     if (o == null || getClass() != o.getClass()) return false;
     PetrolStation that = (PetrolStation) o;
     return Objects.equals(stationName, that.stationName) && Objects.equals(petrolPrices, that.petrolPrices) && Objects.equals(localization, that.localization);
+  }
+
+  public String getStationName() {
+    return stationName;
+  }
+
+  public void setStationName(String stationName) {
+    this.stationName = stationName;
+  }
+
+  public void setPetrolPrices(HashMap<PetrolName, Petrol> petrolPrices) {
+    this.petrolPrices = petrolPrices;
+  }
+
+  public void setLocalization(Localization localization) {
+    this.localization = localization;
   }
 
   @Override

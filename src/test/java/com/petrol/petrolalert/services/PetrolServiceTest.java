@@ -39,6 +39,12 @@ class PetrolServiceTest {
 
     PetrolStation desiredPetrolStation = petrolService.getPetrolStationByName(stationName);
 
+    //tood 2
+    String name = "a";
+    petrolService.addPetrolStation(new PetrolStation("a",null,null));
+
+    repositoryMock.getName().equals(name);
+
     assertEquals(desiredPetrolStation, new PetrolStation(stationName, prices, localization));
   }
 

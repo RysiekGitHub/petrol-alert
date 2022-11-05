@@ -9,7 +9,46 @@ Zadania:
 - dodać testy dla repozytorium, //done
 - dodać testy jednostkowe dla Serwisu z ręcznym zamockowaniem repozytorium // done
 - dodać nowy schemat bazy danych, //done
-- dodać prostego UI do API. Wystawić UI na cluster i lokalnie (UI ma działać lokalnie i na clustrze)
-- przetestować kafkę
-- streamy i kolekcje teoretycznie
 
+- przetestować kafkę
+- streamy i kolekcje teoretycznie //dona
+
+8.09
+- wydzielic DTO zeby móc robić testy
+-  przetestowac metode add z repo przekuzjac paramtery i sprawdzac czy będa sie zgadzac
+- prztetestowac delete zeby sprawdzic czy sie usunie kaskadowo z reference (normlane query/jdbc)
+
+
+- interfjesy funckcyjne i java function - yt java functions basic yt albo pluralsight //done
+
+//
+6.10 priorytety:
+1) realne zyski stramow poza lepsza czytelnoscią
+- 2) migracja - schemat doeclowy ktory ma byc zeby byc we flywayu
+- 2) dodać prostego UI do API. Wystawić UI na cluster i lokalnie (UI ma działać lokalnie i na clustrze)
+na cluster na tym ui mam ppodac adres nazwa serwisu:port () - get svc
+
+12.10:
+2) jak ambasador wie do ktorego serwisu ma strzelać  - podpiąc jakiegos api gateway np ambasadora
+
+3) poczytac o apigateway na razie do jedneo serwisu potem dołożyć drugi mikroserwis
+ktory sie bedzie komunikowal przez kafke
+4) zweryfikowac co z błędem jak streamuje - tu nie mozna zmieniać zrodla danych
+
+i o autentykacji -
+Autentykacja - potwierdzenie tożsamości użytkownika,
+najczęściej wykonywane za pomocą formularza logowania,
+w którym użytkownik wpisuje nazwę użytkownika oraz hasło.
+Czasem występuje również drugi czynnik uwierzytelniający,
+w postaci maila lub smsa z kodem, który musi być dodatkowo wpisany podczas logowania. Ten sposób jest znany jako Two-Factor Authentication.
+
+
+serwis do ktorego nasz ui strzela ktory generuje token i potem ten token wysylany w kazdym requescie
+
+autentykacja
+
+Ambasador - wystawiony pod pod jakims tam adresem zewnwtarznym  - wysztskie requesty co leca leca do
+ambaadroda
+
+20.10
+drugi serwis zeby ngress mial laczyc

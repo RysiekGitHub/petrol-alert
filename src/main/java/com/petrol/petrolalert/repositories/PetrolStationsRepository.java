@@ -2,16 +2,17 @@ package com.petrol.petrolalert.repositories;
 
 import com.petrol.petrolalert.PetrolName;
 import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
-import com.petrol.petrolalert.models.Localization;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Repository
@@ -23,6 +24,7 @@ public class PetrolStationsRepository implements PetrolStationsRepo {
     this.jdbcTemplate = jdbcTemplate;
   }
 
+  @Transactional
   public void add(String name, double lat, double lon, double pb95, double pb98, double diesel, double lpg, double dieselUltimate) {
 
     if (getSerialNumberByStationName(name) == -1) {
@@ -31,10 +33,14 @@ public class PetrolStationsRepository implements PetrolStationsRepo {
               "stationName, coordinateLat, coordinateLong) " +
               "values(?,?,?)",
           name, lat, lon);
+      //https://stackoverflow.com/questions/14537546/how-to-get-generated-id-after-i-inserted-into-a-new-data-record-in-database-usin
+      // bo nazwa nie jest unikalna
+      // transkacje - jdbc
       int serialNumber = getSerialNumberByStationName(name);
 
       Timestamp timestamp = Timestamp.from(Instant.now());
 
+//      throw new NullPointerException();
       jdbcTemplate.update("INSERT INTO petrol_details(" +
               "PB95, PB98, Diesel, LPG, DieselUltimate, dateCreated, serialNumber) " +
               "values(?,?,?,?,?,?,?)",
@@ -65,6 +71,20 @@ public class PetrolStationsRepository implements PetrolStationsRepo {
 
     return null;
 
+  }
+
+  @Override
+  public ArrayList<PetrolStation> getAllPetrolStations() {
+    String sqlGetAllPetrolStations = "SELECT * FROM petrol_stations";
+    try {
+      return jdbcTemplate.queryForObject(sqlGetAllPetrolStations, (rs, rowNum) -> {
+
+        return null;
+      });
+
+    } catch (EmptyResultDataAccessException e) {
+      return null;
+    }
   }
 
   private int getSerialNumberByStationName(String stationName) {

@@ -58,7 +58,7 @@ public class PetrolStationsControllersTest {
   @Test
   public void shouldReturnPetrolStationDetails() throws Exception {
     //given
-    var stationName = "stationName";
+    var stationName = "dupa";
     var lon = 2.2;
     var lat = 1.2;
 
@@ -72,18 +72,10 @@ public class PetrolStationsControllersTest {
     //when
     MockHttpServletResponse response = mockMvc.perform(get("/stations/"+ stationName)).andReturn().getResponse();
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    Map json = mapper.readValue(response.getContentAsString(), Map.class);
+    PetrolStation result = mapper.readValue(response.getContentAsString(), PetrolStation.class);
 
-    var stationNameReceived = json.get("name");
-    var pricesReceived = json.get("petrolPrices");
-    var localizationReceived = json.get("localization");
 
-    //then
-    assertEquals(response.getStatus(), HttpStatus.OK.value());
-
-    assertEquals(stationNameReceived, stationName);
-    assertNotEquals(pricesReceived,null);
-    assertNotEquals(localizationReceived, null);
+    assertEquals(petrolStation,result);
   }
 
   public static String asJsonString(final Object obj) {

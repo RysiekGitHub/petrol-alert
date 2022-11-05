@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class PetrolStationRepositoryMock implements PetrolStationsRepo {
 
-  private final String name;
+  private String name;
   private final HashMap<PetrolName, Petrol> petrolPrices;
   private final Localization localization;
 
@@ -23,7 +23,7 @@ public class PetrolStationRepositoryMock implements PetrolStationsRepo {
 
   @Override
   public void add(String name, double lat, double lon, double pb95, double pb98, double diesel, double lpg, double dieselUltimate) {
-
+    this.name = name;
   }
 
   @Override
@@ -34,5 +34,9 @@ public class PetrolStationRepositoryMock implements PetrolStationsRepo {
 
     System.out.println("Not found station by name: " + stationName);
     return null;
+  }
+
+  public String getName() {
+    return name;
   }
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class PetrolAlertController {
 
@@ -26,5 +28,11 @@ public class PetrolAlertController {
   public ResponseEntity<PetrolStation> getStation(@PathVariable String name) {
     final PetrolStation station = petrolService.getPetrolStationByName(name);
     return ResponseEntity.ok(station);
+  }
+
+  @GetMapping("/stations")
+  public ResponseEntity<ArrayList<PetrolStation>> getStation() {
+    final ArrayList<PetrolStation> stations = null;
+    return ResponseEntity.ok(stations);
   }
 }

@@ -43,10 +43,10 @@ class PetrolStationsRepositoryTest {
     Localization localization = petrolStation.getLocalization();
 
     //then
-    assertEquals(name, petrolStation.getName());
+    assertEquals(name, petrolStation.getStationName());
 
     assertEquals(lat, localization.getLat());
-    assertEquals(lon, localization.getLong());
+    assertEquals(lon, localization.getLon());
 
     assertEquals(pb95, petrolPrices.get(PetrolName.PB95).getPrice());
     assertEquals(pb98, petrolPrices.get(PetrolName.PB98).getPrice());
