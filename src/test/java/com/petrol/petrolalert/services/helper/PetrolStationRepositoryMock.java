@@ -5,8 +5,10 @@ import com.petrol.petrolalert.models.Localization;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
 import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
+import com.petrol.petrolalert.models.PetrolStationDto;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class PetrolStationRepositoryMock implements PetrolStationsRepo {
 
@@ -33,6 +35,11 @@ public class PetrolStationRepositoryMock implements PetrolStationsRepo {
     }
 
     System.out.println("Not found station by name: " + stationName);
+    return null;
+  }
+
+  @Override
+  public List<PetrolStationDto> getAllPetrolStations() {
     return null;
   }
 

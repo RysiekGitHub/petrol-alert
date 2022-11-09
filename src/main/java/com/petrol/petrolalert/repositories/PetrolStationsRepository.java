@@ -4,6 +4,7 @@ import com.petrol.petrolalert.PetrolName;
 import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
+import com.petrol.petrolalert.models.PetrolStationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class PetrolStationsRepository implements PetrolStationsRepo {
@@ -74,17 +76,12 @@ public class PetrolStationsRepository implements PetrolStationsRepo {
   }
 
   @Override
-  public ArrayList<PetrolStation> getAllPetrolStations() {
+  public List<PetrolStationDto> getAllPetrolStations() {
     String sqlGetAllPetrolStations = "SELECT * FROM petrol_stations";
-    try {
-      return jdbcTemplate.queryForObject(sqlGetAllPetrolStations, (rs, rowNum) -> {
-
-        return null;
-      });
-
-    } catch (EmptyResultDataAccessException e) {
-      return null;
-    }
+    return jdbcTemplate.query(sqlGetAllPetrolStations, (rs, rowNum) -> new PetrolStationDto(
+        rs.getInt("serialNumber"),
+        rs.getString("stationName")
+    ));
   }
 
   private int getSerialNumberByStationName(String stationName) {

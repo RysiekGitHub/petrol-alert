@@ -4,10 +4,12 @@ import com.petrol.petrolalert.PetrolName;
 import com.petrol.petrolalert.interfaces.PetrolStationsRepo;
 import com.petrol.petrolalert.models.Petrol;
 import com.petrol.petrolalert.models.PetrolStation;
+import com.petrol.petrolalert.models.PetrolStationDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class PetrolService {
@@ -34,7 +36,7 @@ public class PetrolService {
     return petrolStationsRepository.getPetrolStations(stationName);
   }
 
-  public ArrayList<PetrolStation> getAllPetrolStations() {
+  public List<PetrolStationDto> getAllPetrolStations() {
     return petrolStationsRepository.getAllPetrolStations();
   }
 

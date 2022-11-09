@@ -1,12 +1,14 @@
 package com.petrol.petrolalert.controllers;
 
 import com.petrol.petrolalert.models.PetrolStation;
+import com.petrol.petrolalert.models.PetrolStationDto;
 import com.petrol.petrolalert.services.PetrolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class PetrolAlertController {
@@ -31,8 +33,8 @@ public class PetrolAlertController {
   }
 
   @GetMapping("/stations")
-  public ResponseEntity<ArrayList<PetrolStation>> getStation() {
-    final ArrayList<PetrolStation> stations = null;
+  public ResponseEntity<List<PetrolStationDto>> getStation() {
+    final List<PetrolStationDto> stations = petrolService.getAllPetrolStations();;
     return ResponseEntity.ok(stations);
   }
 }

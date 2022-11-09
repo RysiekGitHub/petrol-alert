@@ -1,8 +1,10 @@
 package com.petrol.petrolalert.interfaces;
 
 import com.petrol.petrolalert.models.PetrolStation;
+import com.petrol.petrolalert.models.PetrolStationDto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PetrolStationsRepo {
 
@@ -10,5 +12,5 @@ public interface PetrolStationsRepo {
 
     PetrolStation getPetrolStations(String stationName);
 
-    ArrayList<PetrolStation> getAllPetrolStations();
+    List<PetrolStationDto> getAllPetrolStations();
 }
